@@ -2,7 +2,6 @@ import csv
 import boto3
 import calendar
 import datetime
-import uuid
 
 csv_file_path = 'C:/Users/hoang/OneDrive/Documents/GitHub/Friendlist/credentials.csv'
 
@@ -15,14 +14,34 @@ def read_aws_creds(csv_file_path):
 
 
 def showCalendar():
-    cur_datetime = datetime.datetime.now()
-    year = cur_datetime.year
-    print(calendar.calendar(year))
+    # cur_datetime = datetime.datetime.now()
+    # year = cur_datetime.year
+    # print(calendar.calendar(year))
+
+    user_id = "lee"
+    event_id = "d002f55b-bde4-48fc-a328-1572bb5fd6d6"
+
+    response = table.get_item(
+        Key={
+            'UserID': user_id,
+            'EventID': event_id
+        }
+    )
+
+    item = response.get('Item', None)
+
+    if item:
+        print(f"  UserID: {item['UserID']}")
+        print(f"  Date: {item['Date']}")
+        print(f"  Start Time: {item['StartTime']}")
+        print(f"  End Time: {item['EndTime']}")
+    else:
+        print("Info not found")
     
 
 def addEvent():
     user_id = "lee"
-    event_id = str(uuid.uuid4())
+    event_id = "work"
     date = "2024-05-30"
     start_time = "10:00:00"
     end_time = "11:00:00"

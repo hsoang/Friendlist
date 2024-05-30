@@ -2,12 +2,16 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
+from flask import Flask
+from views import views
 
 
 cred = credentials.Certificate("C:/Users/hoang/OneDrive/Documents/GitHub/Friendlist/credentials.json")
-app = firebase_admin.initialize_app(cred)
+firebase_db = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+app = Flask(__name__)
+app.register_blueprint(views, url_prefix = "/")
 
 
 def showCalendar():
@@ -24,6 +28,6 @@ def addEvent():
 
 
 if __name__ == "__main__":
-    data = {"name": "Los Angeles", "state": "CA", "country": "USA"}
-
-    db.collection("cities").document("LA").set(data)
+    # data = {"name": "Los Angeles", "state": "CA", "country": "USA"}
+    # db.collection("cities").document("LA").set(data)
+    app.run(debug = True, port = 8000)

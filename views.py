@@ -10,16 +10,13 @@ auth = firebase.auth()
 
 app.secret_key = 'secret'
 
-@views.route("/", methods={'GET', 'POST'})
+@views.route("/", methods={'GET','POST'})
 def login():
     if('user' in session):
         return redirect("/home")
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        # print("HERES THE LOGINS")
-        # print(email)
-        # print(password)
         try:
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = email
@@ -34,8 +31,13 @@ def logout():
     return redirect('/')
 
 
-@views.route("/register")
-def profile():
+@views.route("/register", methods={'GET','POST'})
+def register():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        auth.create_user_with_email_and_password(email, password)
+        return redirect("/")
     return render_template("register.html")
 
 

@@ -44,3 +44,11 @@ def register():
 @views.route("/home")
 def home():
     return render_template("home.html")
+
+@views.route("/scheduler")
+def scheduler():
+    if request.method == 'POST':
+        date = request.form.get('date')
+        startTime = request.form.get('startTime')
+        endTime = request.form.get('endTime')
+    return render_template("scheduler.html")

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduler</title>
+    <link rel ="stylesheet" href="scheduler.css">
+</head>
+<body>
+    <div class="add-busy-event">
+        <form action="/scheduler" method="POST">
+            <p>Add occupied event</p>
+            <div class="input-date">
+                Date: <input type="date" name="date">
+            </div>
+            <div class="input-time">
+                Start time: <input type="time" name="startTime">
+                <p></p>
+                End time: <input type="time" name="endTime">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -23,7 +23,7 @@ def login():
             return redirect("/home")
         except:
             return 'Login failed'
-    return render_template("login.html")
+    return render_template("index.html")
 
 @views.route('/logout')
 def logout():
